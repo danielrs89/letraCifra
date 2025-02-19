@@ -1,0 +1,9 @@
+<div class="container">
+    <h2>Encontrar la palabra más larga</h2>
+
+    <label>Ingresa letras:</label>
+    <input [(ngModel)]="letters" placeholder="Ej. cdesa"/>
+    <button (click)="findLongestWord()">Buscar</button>
+
+    <p *ngIf="longestWord">Palabra más larga: {{longestWord}} </p>
+</div>
