@@ -182,16 +182,14 @@
     <div class="left-side">
       
       <app-longest-word/>
-
+      <app-word-finder></app-word-finder>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
       <div class="pill-group">
         @for (item of [
           { title: '', link: '' },
-          { title: '{{title}}', link: '#' },
-          { title: '{{title}}', link: '#' },
-          { title: '{{title}}', link: '#' },
+
           { title: '{{title}}', link: '#' }
         ]; track item.title) {
           <a

@@ -1,0 +1,10 @@
+<div class="container">
+    <h2>Generador de Palabras</h2>
+    <input [(ngModel)]="letters" placeholder="Introduce exactamente 10 letras" maxlength="10" />
+    <button (click)="findWords()">Buscar Palabras</button>
+  
+    <h3>Palabras encontradas:</h3>
+    <ul>
+      <li *ngFor="let word of validWords">{{ word }}-{{word.length}} </li>
+    </ul>
+  </div>

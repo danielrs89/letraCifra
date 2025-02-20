@@ -17,7 +17,11 @@ export class LongestWordService {
 
     return (
       this.dictionari
-        .filter((word) => word.split('').every((letter) => availableLetters.includes(letter)))
+        .filter((word) => 
+          word.length > 5 && // Mayor de 5 caracteres
+          new Set(word).size === word.length && // No repetir letras
+          word.split('').every((letter) => availableLetters.includes(letter))
+        )
         .sort((a, b) => b.length - a.length)[0] || ''
     );
   }
