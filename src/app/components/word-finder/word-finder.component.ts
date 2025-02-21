@@ -17,8 +17,7 @@ export class WordFinderComponent {
   generatedWords: string[] = [];
   isLoading: boolean = false;
 
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   findWords() {
     if (this.letters.length !== 10) {
@@ -27,6 +26,26 @@ export class WordFinderComponent {
     }
 
     this.loadAndFindWords();
+  }
+
+  loadAndFindWords() {
+    this.isLoading = true;
+
+    this.http.get('/wordList.txt', { responseType: 'text' }).subscribe({
+      next: (data) => {
+        const dictionary = new Set(data.split('\n').map(word => word.trim()));
+        const possibleWords = this.generateCombinations(this.letters.toLowerCase());
+        this.validWords = possibleWords
+          .filter(word => word.length >= 5 && dictionary.has(word))
+          .sort((a, b) => b.length - a.length);
+
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error("Error al cargar wordList.txt:", err);
+        this.isLoading = false;
+      }
+    });
   }
 
   generateRandomWords() {
@@ -54,44 +73,7 @@ export class WordFinderComponent {
     }
   }
 
-  // private loadAndFindWords() {
-  //   this.http.get<{ words: string[] }>('/wordList.json').subscribe({
-  //     next: (data) => {
-  //       const dictionary = new Set(data.words);
-  //       const possibleWords = this.generateCombinations(this.letters.toLowerCase());
-  //       this.validWords = possibleWords.filter(word => word.length >= 5 && dictionary.has(word));
-  //     },
-  //     error: (err) => {
-  //       console.error("Error al cargar wordList.json:", err);
-  //     }
-  //   });
-  // }
-private loadAndFindWords() {
-  // Mostrar indicador de carga
-  this.isLoading = true;
-
-  this.http.get<{ words: string[] }>('/wordList.json').subscribe({
-    next: (data) => {
-      const dictionary = new Set(data.words);
-      const possibleWords = this.generateCombinations(this.letters.toLowerCase());
-      this.validWords = possibleWords
-        .filter(word => word.length >= 5 && dictionary.has(word))
-        .sort((a, b) => b.length - a.length); // Ordenar de mayor a menor longitud
-
-      // Ocultar indicador de carga
-      this.isLoading = false;
-    },
-    error: (err) => {
-      console.error("Error al cargar wordList.json:", err);
-
-      // Ocultar indicador de carga en caso de error
-      this.isLoading = false;
-    }
-  });
-}
-
-
-  private generateCombinations(letters: string): string[] {
+  generateCombinations(letters: string): string[] {
     const results = new Set<string>();
     const array = letters.split('');
 
