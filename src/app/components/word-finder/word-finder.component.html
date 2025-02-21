@@ -1,10 +1,33 @@
-<div class="container">
-    <h2>Generador de Palabras</h2>
-    <input [(ngModel)]="letters" placeholder="Introduce exactamente 10 letras" maxlength="10" />
-    <button (click)="findWords()">Buscar Palabras</button>
-  
-    <h3>Palabras encontradas:</h3>
+<div>
+  <h2>Buscador de Palabras</h2>
+  <input type="text" [(ngModel)]="letters" placeholder="Introduce 10 letras" maxlength="10">
+  <button (click)="findWords()">Buscar Palabras</button>
+
+  <h3>Palabras Válidas:</h3>
+  @if (isLoading) {Buscando palabras...}
+  @else if (validWords.length===0) {No se encontro ninguna palabra}
+  @else {
+  <fieldset>
+    @for (word of validWords; track $index) {
+    <legend *ngIf="$index === 0">{{ word.length }}</legend>
+    <li *ngIf="$index !== 0">{{ word }}</li>
+    }
+  </fieldset>
+  }
+
+
+
+
+  <div>
+    <h2>Generar Palabras Aleatorias</h2>
+    <label for="numVowels">Número de Vocales (0-10):</label>
+    <input type="number" id="numVowels" [(ngModel)]="numVowels" min="0" max="10">
+    <button (click)="generateRandomWords()">Generar Palabras</button>
+
+    <h3>Combinación Generadas:</h3>
     <ul>
-      <li *ngFor="let word of validWords">{{ word }}-{{word.length}} </li>
+      <li *ngFor="let generatedWord of generatedWords">{{ generatedWord }}</li>
     </ul>
   </div>
+
+</div>

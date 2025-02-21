@@ -13,6 +13,10 @@ import { FormsModule } from '@angular/forms';
 export class WordFinderComponent {
   letters: string = '';
   validWords: string[] = [];
+  numVowels: number | null = null;
+  generatedWords: string[] = [];
+  isLoading: boolean = false;
+
 
   constructor(private http: HttpClient) {}
 
@@ -22,26 +26,77 @@ export class WordFinderComponent {
       return;
     }
 
-    // Cargar el JSON correctamente desde assets
-    this.http.get<{ words: string[] }>('/wordList.json').subscribe({
-      next: (data) => {
-        console.log("Archivo JSON cargado:", data); // Verifica que se cargó bien
-        const dictionary = new Set(data.words);
-        const possibleWords = this.generateCombinations(this.letters);
-        this.validWords = possibleWords.filter(word => word.length > 5 && dictionary.has(word));
-      },
-      error: (err) => {
-        console.error("Error al cargar wordList.json:", err);
-      }
-    });
+    this.loadAndFindWords();
   }
+
+  generateRandomWords() {
+    if (this.numVowels === null || this.numVowels < 0 || this.numVowels > 10) {
+      alert('Introduce un número válido de vocales (0-10).');
+      return;
+    }
+
+    const vowels = 'AEIOU';
+    const consonants = 'BCDFGHJKLMNPQRSTVWXYZ';
+    this.generatedWords = [];
+
+    for (let i = 0; i < 10; i++) {
+      let word = '';
+      let vowelCount = 0;
+      while (vowelCount < this.numVowels) {
+        word += vowels[Math.floor(Math.random() * vowels.length)];
+        vowelCount++;
+      }
+      while (word.length < 10) {
+        word += consonants[Math.floor(Math.random() * consonants.length)];
+      }
+      word = word.split('').sort(() => Math.random() - 0.5).join(''); // Shuffle letters
+      this.generatedWords.push(word);
+    }
+  }
+
+  // private loadAndFindWords() {
+  //   this.http.get<{ words: string[] }>('/wordList.json').subscribe({
+  //     next: (data) => {
+  //       const dictionary = new Set(data.words);
+  //       const possibleWords = this.generateCombinations(this.letters.toLowerCase());
+  //       this.validWords = possibleWords.filter(word => word.length >= 5 && dictionary.has(word));
+  //     },
+  //     error: (err) => {
+  //       console.error("Error al cargar wordList.json:", err);
+  //     }
+  //   });
+  // }
+private loadAndFindWords() {
+  // Mostrar indicador de carga
+  this.isLoading = true;
+
+  this.http.get<{ words: string[] }>('/wordList.json').subscribe({
+    next: (data) => {
+      const dictionary = new Set(data.words);
+      const possibleWords = this.generateCombinations(this.letters.toLowerCase());
+      this.validWords = possibleWords
+        .filter(word => word.length >= 5 && dictionary.has(word))
+        .sort((a, b) => b.length - a.length); // Ordenar de mayor a menor longitud
+
+      // Ocultar indicador de carga
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error("Error al cargar wordList.json:", err);
+
+      // Ocultar indicador de carga en caso de error
+      this.isLoading = false;
+    }
+  });
+}
+
 
   private generateCombinations(letters: string): string[] {
     const results = new Set<string>();
     const array = letters.split('');
 
     const permute = (arr: string[], current: string) => {
-      if (current.length > 1) results.add(current);
+      if (current.length > 1) results.add(current); // Add words longer than 1
       for (let i = 0; i < arr.length; i++) {
         permute([...arr.slice(0, i), ...arr.slice(i + 1)], current + arr[i]);
       }
