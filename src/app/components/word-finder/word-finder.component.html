@@ -1,36 +1,39 @@
 <div>
-  <h2>Buscador de Palabras</h2>
-  <input type="text" [(ngModel)]="letters" placeholder="Introduce 10 letras" maxlength="10">
-  <button (click)="findWords()">Buscar Palabras</button>
-
-  <h3>Palabras Válidas:</h3>
-  @if (isLoading) {Buscando palabras...}
-  @else if (validWords.length===0) {No se encontro ninguna palabra}
-  @else {
-  @for (word of validWords; track $index) {
-  <ul>
-    <li>{{ word }}+{{word.length}} </li>
-  </ul>
-  }
-  }
-
-
-
-
-  <div>
-    <h2>Generar Palabras Aleatorias</h2>
+  <div class="container">
+    <fieldset>
+      <legend><h2>Generar Palabras Aleatorias</h2></legend>
+    
     <label for="numVowels">Número de Vocales (2-8):</label>
     <input type="number" id="numVowels" [(ngModel)]="numVowels" min="2" max="8">
     <button (click)="generateRandomWords()">Generar Palabras</button>
 
-    <h3>Combinación Generadas:</h3>
-    <ol>
-      @for (words of generatedWords; track $index) {
-      <li>
-        {{ words }}
-      </li>
-      }
-    </ol>
+    <h3>Combinación Generada:</h3>
+    <p>{{generatedWords}} </p>
+    
+  </fieldset>
+
   </div>
 
+  <div class="container">
+    <fieldset>
+      <legend><h2>Buscador de Palabras</h2></legend>
+    
+    <!-- <input type="text" [(ngModel)]="letters" placeholder="Introduce 10 letras" maxlength="10" value="generatedWords"> -->
+    <input type="text" placeholder="Introduce 10 letras" maxlength="10" [value]="letters">
+    <button (click)="findWords()">Buscar Palabras</button>
+
+    <h3>Palabras Válidas:</h3>
+    @if (isLoading) {Buscando palabras...}
+    @else if (validWords.length===0) {No se encontro ninguna palabra}
+    @else {
+    @for (word of validWords; track $index) {
+      <div>
+        <ul>
+          <li>{{ word }}+{{word.length}} </li>
+        </ul>
+      </div>
+    }
+    }
+  </fieldset>
+  </div>
 </div>

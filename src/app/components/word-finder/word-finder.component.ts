@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,12 +14,19 @@ export class WordFinderComponent {
   letters: string = '';
   validWords: string[] = [];
   numVowels: number | null = null;
-  generatedWords: string[] = [];
+  generatedWords: string = '';
   isLoading: boolean = false;
+  definition = output<string[]>();
 
   constructor(private http: HttpClient) { }
-
+  
+  getRandonWords(){
+    this.letters=this.generatedWords;
+    }
   findWords() {
+    
+    this.letters=this.letters.trim();
+
     if (this.letters.length !== 10) {
       alert('Introduce exactamente 10 letras.');
       return;
@@ -40,6 +47,7 @@ export class WordFinderComponent {
           .sort((a, b) => b.length - a.length);
 
         this.isLoading = false;
+        this.definition.emit(this.validWords);
       },
       error: (err) => {
         console.error("Error al cargar wordList.txt:", err);
@@ -54,11 +62,10 @@ export class WordFinderComponent {
       return;
     }
 
+    // const vowels = 'AEIOUÁÉÍÓÚ';
     const vowels = 'AEIOU';
     const consonants = 'BCDFGHJKLMNPQRSTVWXYZ';
-    this.generatedWords = [];
 
-    for (let i = 0; i < 10; i++) {
       let word = '';
       let vowelCount = 0;
       while (vowelCount < this.numVowels) {
@@ -69,8 +76,8 @@ export class WordFinderComponent {
         word += consonants[Math.floor(Math.random() * consonants.length)];
       }
       word = word.split('').sort(() => Math.random() - 0.5).join(''); // Shuffle letters
-      this.generatedWords.push(word);
-    }
+      this.generatedWords=word;
+      this.getRandonWords();
   }
 
   generateCombinations(letters: string): string[] {
