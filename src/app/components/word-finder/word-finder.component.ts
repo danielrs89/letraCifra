@@ -38,7 +38,7 @@ export class WordFinderComponent {
   loadAndFindWords() {
     this.isLoading = true;
 
-    this.http.get('/wordList.txt', { responseType: 'text' }).subscribe({
+    this.http.get('./wordList.txt', { responseType: 'text' }).subscribe({
       next: (data) => {
         const dictionary = new Set(data.split('\n').map(word => word.trim()));
         const possibleWords = this.generateCombinations(this.letters.toLowerCase());
