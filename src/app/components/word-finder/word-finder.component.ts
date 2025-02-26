@@ -20,12 +20,10 @@ export class WordFinderComponent {
 
   constructor(private http: HttpClient) { }
   
-  getRandonWords(){
-    this.letters=this.generatedWords;
-    }
+  
   findWords() {
-    
-    this.letters=this.letters.trim();
+    this.letters = this.letters ? this.letters.trim() : this.generatedWords;
+
 
     if (this.letters.length !== 10) {
       alert('Introduce exactamente 10 letras.');
@@ -41,13 +39,16 @@ export class WordFinderComponent {
     this.http.get('./wordList.txt', { responseType: 'text' }).subscribe({
       next: (data) => {
         const dictionary = new Set(data.split('\n').map(word => word.trim()));
-        const possibleWords = this.generateCombinations(this.letters.toLowerCase());
+        const possibleWords = this.generateCombinations(this.letters.toLowerCase().trim());
         this.validWords = possibleWords
           .filter(word => word.length >= 5 && dictionary.has(word))
           .sort((a, b) => b.length - a.length);
 
         this.isLoading = false;
         this.definition.emit(this.validWords);
+        
+        this.letters='';
+        this.generatedWords='';
       },
       error: (err) => {
         console.error("Error al cargar wordList.txt:", err);
@@ -57,8 +58,8 @@ export class WordFinderComponent {
   }
 
   generateRandomWords() {
-    if (this.numVowels === null || this.numVowels < 0 || this.numVowels > 10) {
-      alert('Introduce un número válido de vocales (0-10).');
+    if (this.numVowels === null || this.numVowels < 2 || this.numVowels > 8) {
+      alert('Introduce un número válido de vocales (2-8).');
       return;
     }
 
@@ -77,7 +78,7 @@ export class WordFinderComponent {
       }
       word = word.split('').sort(() => Math.random() - 0.5).join(''); // Shuffle letters
       this.generatedWords=word;
-      this.getRandonWords();
+     
   }
 
   generateCombinations(letters: string): string[] {
@@ -92,6 +93,7 @@ export class WordFinderComponent {
     };
 
     permute(array, '');
+
     return Array.from(results);
   }
 }

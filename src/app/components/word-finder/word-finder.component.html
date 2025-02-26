@@ -19,13 +19,19 @@
       <legend><h2>Buscador de Palabras</h2></legend>
     
     <!-- <input type="text" [(ngModel)]="letters" placeholder="Introduce 10 letras" maxlength="10" value="generatedWords"> -->
-    <input type="text" placeholder="Introduce 10 letras" maxlength="10" [value]="letters">
-    <button (click)="findWords()">Buscar Palabras</button>
+    <!-- <input type="text" placeholder="Introduce 10 letras" maxlength="10" [value]="letters">
+    <button (click)="findWords()">Buscar Palabras</button> -->
+    <input type="text" placeholder="Introduce 10 letras" maxlength="10" [(ngModel)]="letters">
+<button (click)="findWords()">Buscar Palabras</button>
 
-    <h3>Palabras Válidas:</h3>
-    @if (isLoading) {Buscando palabras...}
-    @else if (validWords.length===0) {No se encontro ninguna palabra}
-    @else {
+    <!-- <h3>Palabras Válidas:</h3> -->
+    @if (isLoading) {
+      <p>Buscando palabras...</p>
+    }
+    <!--@else if (validWords.length===0) {
+      <p>No se encontró ninguna palabra.</p>
+    }
+     @else {
     @for (word of validWords; track $index) {
       <div>
         <ul>
@@ -33,7 +39,7 @@
         </ul>
       </div>
     }
-    }
+    } -->
   </fieldset>
   </div>
 </div>

@@ -17,7 +17,5 @@ export class AppComponent {
   setValidWords(e:any){
     this.validWords=e;
   }
-
-  
 }
 
