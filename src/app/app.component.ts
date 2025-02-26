@@ -12,10 +12,9 @@ import { WordFinderComponent } from './components/word-finder/word-finder.compon
 export class AppComponent {
   title = 'Letra y Cifra';
 
-  validWords : string[] = [];
-  
-  setValidWords(e:any){
-    this.validWords=e;
+  validWords: string[] = [];
+
+  setValidWords(e: any) {
+    this.validWords = e;
   }
 }
-

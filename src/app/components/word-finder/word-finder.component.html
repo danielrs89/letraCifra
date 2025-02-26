@@ -1,34 +1,34 @@
 <div>
   <div class="container">
     <fieldset>
-      <legend><h2>Generar Palabras Aleatorias</h2></legend>
-    
-    <label for="numVowels">Número de Vocales (2-8):</label>
-    <input type="number" id="numVowels" [(ngModel)]="numVowels" min="2" max="8">
-    <button (click)="generateRandomWords()">Generar Palabras</button>
+      <legend>
+        <h2>Generar Palabras Aleatorias</h2>
+      </legend>
 
-    <h3>Combinación Generada:</h3>
-    <p>{{generatedWords}} </p>
-    
-  </fieldset>
+      <label for="numVowels">Número de Vocales (2-8):</label>
+      <input type="number" id="numVowels" [(ngModel)]="numVowels" min="2" max="8">
+      <button (click)="generateRandomWords()">Generar Palabras</button>
+
+      <h3>Combinación Generada:</h3>
+      <p>{{generatedWords}} </p>
+
+    </fieldset>
 
   </div>
 
   <div class="container">
     <fieldset>
-      <legend><h2>Buscador de Palabras</h2></legend>
-    
-    <!-- <input type="text" [(ngModel)]="letters" placeholder="Introduce 10 letras" maxlength="10" value="generatedWords"> -->
-    <!-- <input type="text" placeholder="Introduce 10 letras" maxlength="10" [value]="letters">
-    <button (click)="findWords()">Buscar Palabras</button> -->
-    <input type="text" placeholder="Introduce 10 letras" maxlength="10" [(ngModel)]="letters">
-<button (click)="findWords()">Buscar Palabras</button>
+      <legend>
+        <h2>Buscador de Palabras</h2>
+      </legend>
 
-    <!-- <h3>Palabras Válidas:</h3> -->
-    @if (isLoading) {
+      <input type="text" placeholder="Introduce 10 letras" maxlength="10" [(ngModel)]="letters">
+      <button (click)="findWords()">Buscar Palabras</button>
+
+      @if (isLoading) {
       <p>Buscando palabras...</p>
-    }
-    <!--@else if (validWords.length===0) {
+      }
+      <!--@else if (validWords.length===0) {
       <p>No se encontró ninguna palabra.</p>
     }
      @else {
@@ -40,6 +40,6 @@
       </div>
     }
     } -->
-  </fieldset>
+    </fieldset>
   </div>
 </div>
