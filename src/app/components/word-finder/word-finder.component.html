@@ -10,7 +10,7 @@
       <button (click)="generateRandomWords()">Generar Palabras</button>
 
       <h3>Combinación Generada:</h3>
-      <p>{{generatedWords}} </p>
+      <p>{{generatedWords}}</p>
 
     </fieldset>
 
@@ -28,18 +28,14 @@
       @if (isLoading) {
       <p>Buscando palabras...</p>
       }
-      <!--@else if (validWords.length===0) {
+      @else if (validWords.length===0) {
       <p>No se encontró ninguna palabra.</p>
-    }
-     @else {
-    @for (word of validWords; track $index) {
-      <div>
-        <ul>
-          <li>{{ word }}+{{word.length}} </li>
-        </ul>
-      </div>
-    }
-    } -->
+      }
     </fieldset>
   </div>
+  @if (!isLoading) {
+
+  {{letters}}
+  }
+
 </div>
