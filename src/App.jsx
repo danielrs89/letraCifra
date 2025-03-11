@@ -1,23 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Menu from './components/NavComponent';
+import Nav from './components/NavComponent';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import LetraPage from './pages/LetraPage';
 import CifraPage from './pages/CifraPage';
+import LetraPage from './pages/LetraPage';
 
 
 function App() {
 
   return (
     <>
-    <Routes>
-      <Route path='/' element={<HomePage/>}/>
-      <Route path='/letra' element={<LetraPage/>}/>
-      <Route path='/cifra' element={<CifraPage/>}/>
-    </Routes>
-    <Menu/>
-    
-      
+      <Routes>
+        <Route path='/cifra' element={<CifraPage />} />
+        <Route path='/letra' element={<LetraPage />} />
+      </Routes>
+      <Nav />
     </>
   )
 }
