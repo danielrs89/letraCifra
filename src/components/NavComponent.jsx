@@ -1,18 +1,17 @@
-import Cifra from './views/Cifra';
-import Letra from './views/Letra';
+
 
 function Menu() {
     return (
         <div>
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="src\App">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={Letra}>Letra</a>
+                    <a class="nav-link" href="/letra">Letra</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={Cifra}>Cifra</a>
+                    <a class="nav-link" href="/cifra">Cifra</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
