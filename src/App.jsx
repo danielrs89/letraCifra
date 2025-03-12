@@ -1,8 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Nav from './components/NavComponent';
 import { Route, Routes } from 'react-router-dom';
-import CifraPage from './pages/CifraPage';
 import LetraPage from './pages/LetraPage';
+import CifraPage from './pages/CifraPage';
+import HomePage from './pages/HomePage';
+import './App.css'
+
 
 
 function App() {
@@ -10,10 +12,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/cifra' element={<CifraPage />} />
+        <Route path='/' element={<HomePage />} />
         <Route path='/letra' element={<LetraPage />} />
+        <Route path='/cifra' element={<CifraPage />} />
       </Routes>
-      <Nav />
     </>
   )
 }

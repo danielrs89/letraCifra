@@ -1,7 +1,11 @@
+import NavComponent from '../components/NavComponent'
 
 function Cifra() {
   return (
-    <div>cifra</div>
+    <>
+      <NavComponent />
+      <div>Cifra</div>
+    </>
   )
 }
 

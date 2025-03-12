@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom"
+
 function Menu() {
     return (
-        <div>
+        <div class="position-fixed top-0 start-0 w-100 bg-light shadow-sm z-3">    
             <ul class="nav justify-content-center">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/cifra">Cifra</a>
+                <li class="nav-item">
+                    <Link class="nav-link" to="/letra">Letra</Link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/letra">Letra</a>
+                    <Link class="nav-link" to="/cifra">Cifra</Link>
                 </li>
             </ul>
         </div>

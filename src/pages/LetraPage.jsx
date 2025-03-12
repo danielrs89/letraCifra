@@ -1,7 +1,11 @@
+import NavComponent from '../components/NavComponent'
 
 function Letra() {
   return (
-    <div>Letra</div>
+    <>
+      <NavComponent />
+      <div>Letra</div>
+    </>
   )
 }
 
