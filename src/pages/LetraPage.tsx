@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import React from 'react';
 import NavComponent from '../components/NavComponent';
+import { Link } from 'react-router-dom';
 
 
 
@@ -112,12 +113,17 @@ const WordFinder = () => {
       {isLoading ? (
         <p className="mt-4">Cargando...</p>
       ) : (
-        <ul className="mt-4">
+        <div className="mt-4">
           
           {validWords.map((word, index) => (
-            <li key={index} className="border-b py-1">{word}</li>
+            <Link 
+              target="_blank" 
+              key={index} 
+              to={`http://dle.rae.es/srv/search?w=${word}`}
+              className="border-b py-1"
+            ><p>{word}</p></Link>
           ))}
-        </ul>
+        </div>
       )}
     </div>
     </>
