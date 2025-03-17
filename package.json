@@ -1,13 +1,17 @@
 {
   "name": "letra-cifra",
+  "homepage": "https://danielrs89.github.io/letraCifra",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist", 
     "lint": "eslint .",
-    "preview": "vite preview"
+    "test": "vite test"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
@@ -23,7 +27,7 @@
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^15.15.0",
+    "gh-pages": "^6.3.0",
     "vite": "^6.2.0"
   }
 }
