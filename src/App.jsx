@@ -4,6 +4,7 @@ import LetraPage from './pages/LetraPage';
 import CifraPage from './pages/CifraPage';
 import HomePage from './pages/HomePage';
 import './App.css'
+import React from 'react';
 
 
 

@@ -22,7 +22,7 @@ const WordFinder = () => {
         alert('Introduce exactamente 10 letras (sin caracteres especiales).');
         return;
       }
-      
+
       setWordsCombined(inputLetters);
       await loadAndFindWords(inputLetters);
     } catch (error) {
