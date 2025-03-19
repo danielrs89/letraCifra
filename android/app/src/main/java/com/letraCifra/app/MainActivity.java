@@ -1,4 +1,4 @@
-package com.granped.app;
+package com.letraCifra.app;
 
 import com.getcapacitor.BridgeActivity;
 
